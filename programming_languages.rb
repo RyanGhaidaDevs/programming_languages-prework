@@ -1,69 +1,29 @@
-languages = {
-  :oo => {
-    :ruby => {
-      :type => "interpreted"
-    },
-    :javascript => {
-      :type => "interpreted"
-    },
-    :python => {
-      :type => "interpreted"
-    },
-    :java => {
-      :type => "compiled"
-    }
-  },
-  :functional => {
-    :clojure => {
-      :type => "compiled"
-    },
-    :erlang => {
-      :type => "compiled"
-    },
-    :scala => {
-      :type => "compiled"
-    },
-    :javascript => {
-      :type => "interpreted"
-    }
+def reformat_language(languages)
 
-  }
-}
+ new_hash = {}
+
+  languages.each do |first_tier, hash|
 
 
-def reformat_languages (languages)
 
-  new_hash = {}
-  arr = []
+   hash.each do |language, type|
 
 
-  languages.collect do |first_tier, language|
 
-    if first_tier == :oo
-
-      puts ":oo"
-
-      language.collect do |lang, type|
-
-        puts new_hash[lang] = type
+      if new_hash.has_key?(language)
 
 
-      end
 
+         new_hash[language][:style] << first_tier
 
-    else
+      else
 
-      puts ":functional"
+         new_hash[language] = type
 
-        language.collect do |lang, type|
+         new_hash[language][:style] = [first_tier]
 
-        puts new_hash[lang] = type
-
-      end
-    end
+     end
+   end
   end
-
-
-new_hash
-
+  new_hash
 end
